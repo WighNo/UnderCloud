@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookahsAndSmokingSystems", "HookahsAndSmokingSystems\HookahsAndSmokingSystems.csproj", "{6BE79BFD-FBCB-45C8-97B5-F0742BBE1978}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BE79BFD-FBCB-45C8-97B5-F0742BBE1978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BE79BFD-FBCB-45C8-97B5-F0742BBE1978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BE79BFD-FBCB-45C8-97B5-F0742BBE1978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BE79BFD-FBCB-45C8-97B5-F0742BBE1978}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

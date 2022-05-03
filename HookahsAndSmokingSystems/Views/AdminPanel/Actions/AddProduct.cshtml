@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model HookahsAndSmokingSystems.Models.Interfaces.ISubCategoriesRepository
+
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<div xmlns="http://www.w3.org/1999/html">
+    <h1 class="display-6 mb-1">Добавление товара</h1>
+    <form method="post">
+
+        <textarea type="message" style="resize: none" class="mt-3 me-3" cols="35" rows="1" name="name" placeholder="Name"></textarea>
+
+        <p class="mt-3"/>
+        @Html.DropDownList("subCategory", Model.GetListElementsName().Select(s => new SelectListItem { Text = s.ToString(), Value = s.ToString() }))     
+ 
+        <br/>
+        <textarea type="message" oninput="this.value = this.value.replace(/\s+/g, '')" style="resize: none" cols="185" rows="1" class="mt-3" name="imageUrl" placeholder="Image Url"></textarea>
+
+        <br/>
+        <textarea type="message" style="resize: none" class="mt-3" cols="125" rows="12"  name="description" placeholder="Full Description"></textarea>
+
+        <br/>
+        <input type="text" oninput="this.value = this.value.replace(/\s+/g,'')" class="mt-3" name="price" placeholder="Price"/><text class="fs-5 align-content-center"> ₽</text>
+        
+        <br/>
+        <button class="btn btn-outline-primary mt-5" type="submit">Добавить новый продукт</button>
+    </form>
+</div>
+
