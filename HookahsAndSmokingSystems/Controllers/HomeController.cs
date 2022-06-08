@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using HookahsAndSmokingSystems.Database;
@@ -6,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HookahsAndSmokingSystems.Models;
 using HookahsAndSmokingSystems.Models.Categoty;
+using HookahsAndSmokingSystems.Models.Interfaces;
 using HookahsAndSmokingSystems.Models.Product;
-using Microsoft.EntityFrameworkCore;
 
 namespace HookahsAndSmokingSystems.Controllers
 {
@@ -16,10 +17,13 @@ namespace HookahsAndSmokingSystems.Controllers
         private readonly ILogger<HomeController> _logger;
         private ProductContext _productContext;
 
-        public HomeController(ILogger<HomeController> logger, ProductContext productContext)
+        private ISubCategoriesRepository _subCategoriesRepository;
+        
+        public HomeController(ILogger<HomeController> logger, ProductContext productContext, ISubCategoriesRepository subSubCategoriesesRepository)
         {
             _logger = logger;
             _productContext = productContext;
+            _subCategoriesRepository = subSubCategoriesesRepository;
         }
 
         public IActionResult Index()
@@ -35,14 +39,29 @@ namespace HookahsAndSmokingSystems.Controllers
         public IActionResult MoreAtProduct(int id)
         {
             Product product = _productContext.Products.First(p => p.Id == id);
+            product.SubCategoriesRepository = _subCategoriesRepository;
             return View(product);
         }
-
-        public IActionResult Privacy()
+        
+        [HttpPost]
+        public IActionResult MoreAtProduct(string newStatusName, string productId)
         {
-            return View();
-        }
+            Console.WriteLine(newStatusName);
+            Console.WriteLine(productId);
+            
+            var dbProduct = _productContext.Products.First(p => p.Id == int.Parse(productId));
+            
+            dbProduct.Status = newStatusName;
+            dbProduct.SubCategory = _subCategoriesRepository.List.FirstOrDefault(x => x.Name == newStatusName);
 
+            _productContext.SaveChanges();
+            
+            Product product = _productContext.Products.First(p => p.Id == int.Parse(productId));
+            product.SubCategoriesRepository = _subCategoriesRepository;
+            
+            return View(product);
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

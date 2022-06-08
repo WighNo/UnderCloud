@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HookahsAndSmokingSystems.Models.Categoty;
+using HookahsAndSmokingSystems.Models.Interfaces;
 
 namespace HookahsAndSmokingSystems.Models.Product
 {
@@ -19,5 +20,8 @@ namespace HookahsAndSmokingSystems.Models.Product
 
         [Required] public string Description { get; set; }
         
+        [Required] public string Status { get; set; }
+
+        [NotMapped] public ISubCategoriesRepository SubCategoriesRepository { get; set; }
     }
 }

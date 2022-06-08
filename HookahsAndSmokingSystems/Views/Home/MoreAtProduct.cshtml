@@ -1,4 +1,7 @@
-﻿@model HookahsAndSmokingSystems.Models.Product.Product
+﻿@using Microsoft.AspNetCore.Html
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model HookahsAndSmokingSystems.Models.Product.Product
+
 
 @{
     ViewData["Title"] = "About";
@@ -12,6 +15,7 @@
 </head>
 <body>
 <div>
+    <form action="" method="post">
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">
@@ -22,14 +26,26 @@
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-6">
                         <h4 class="box-title">Описание</h4>
-                        <p>@Model.Description</p>
-                        <text class="display-5 align-bottom">Цена: </text><text class="mt-5 display-6">@Model.Price₽<small class="text-success"></small></text>
+                        <p style="font-size: 20px">@Model.Description</p>
 
+                        <div class="mt-5">
+                            <text class="display-6 align-bottom fw-bold" style="font-size: 22px">дата создания - дата завершения: </text>
+                            <p/>
+                            <text class="mt-2 display-6 align-bottom" style="font-size: 24px">@Model.Price</text>
+                            <p class="mt-2"/>
+                            <text class="mt-5 display-6 fw-bold" style="font-size: 22px">Статус Заказа:</text>
+                            @{
+                                @Html.DropDownList("newStatusName", Model.SubCategoriesRepository.GetListElementsName().Select(s => new SelectListItem {Text = s.ToString(), Value = s.ToString()}), Model.Status)
+                                <input type="hidden" name="productId" value="@Model.Id"/>
+                            }
+                        </div>
                     </div>
+                    <button class="btn btn-outline-dark mt-5" type="submit">Подтвердить изменения</button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 </div>
 </body>
 </html>

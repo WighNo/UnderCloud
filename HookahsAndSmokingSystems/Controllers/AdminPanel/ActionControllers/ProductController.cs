@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using HookahsAndSmokingSystems.Database;
+using HookahsAndSmokingSystems.Models.Categoty;
 using HookahsAndSmokingSystems.Models.Interfaces;
 using HookahsAndSmokingSystems.Models.Product;
 using Microsoft.AspNetCore.Mvc;
@@ -29,14 +32,17 @@ namespace HookahsAndSmokingSystems.Controllers.AdminPanelActionControllers
         {
             if (name is null == true || imageUrl is null == true || description is null == true || price is null == true)
                 return Add();
+
+            SubCategory selectedSubCategory = _productContext.SubCategories.FirstOrDefault(c => c.Name == subCategory);
             
             Product product = new Product
             {
                 Name = name,
-                SubCategory = _productContext.SubCategories.FirstOrDefault(c => c.Name == subCategory),
+                SubCategory = selectedSubCategory,
+                Status = selectedSubCategory!.Name,
                 DisplayingImageUrl = imageUrl,
                 Description = description,
-                Price = price
+                Price = price,
             };
 
             _productContext.Add(product);

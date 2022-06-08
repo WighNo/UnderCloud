@@ -8,8 +8,6 @@ using HookahsAndSmokingSystems.Models.Interfaces;
 using HookahsAndSmokingSystems.Models.Product;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +28,7 @@ namespace HookahsAndSmokingSystems
         {
             services.AddMvc();
             services.AddDbContext<ProductContext>(o => o.UseSqlite(Configuration.GetConnectionString("Db")));
-
+            
             services.AddScoped<ICategory, Category>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubCategoriesRepository, SubCategoriesRepository>();
