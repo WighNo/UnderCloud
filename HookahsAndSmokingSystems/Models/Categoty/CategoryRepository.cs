@@ -2,7 +2,6 @@
 using System.Linq;
 using HookahsAndSmokingSystems.Database;
 using HookahsAndSmokingSystems.Models.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace HookahsAndSmokingSystems.Models.Categoty
 {
